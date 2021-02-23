@@ -14,10 +14,10 @@ class PostManager{
     }
 
     public function add(Post $article){
-        $q = $this->db->prepare('INSERT INTO posts(id, title, content) VALUES(:title, :content)');
+        $q = $this->db->prepare('INSERT INTO posts(id, title, matter) VALUES(:title, :matter)');
 
         $q->bindValue(':title', $article->getTitle());
-        $q->bindValue(':content', $article->getContent());
+        $q->bindValue(':matter', $article->getMatter());
 
         $q->execute();
     }
@@ -42,10 +42,10 @@ class PostManager{
     }
 
     public function update(Post $article){
-        $q = $this->db->prepare('UPDATE posts SET title = :title, content = :content WHERE id = :id');
+        $q = $this->db->prepare('UPDATE posts SET title = :title, matter = :matter WHERE id = :id');
 
         $q->bindValue(':title', $article->getTitle(), PDO::PARAM_INT);
-        $q->bindValue(':content', $article->getContent(), PDO::PARAM_INT);
+        $q->bindValue(':matter', $article->getMatter(), PDO::PARAM_INT);
         $q->bindValue(':id', $id->getId(), PDO::PARAM_INT);
 
         $q->execute();

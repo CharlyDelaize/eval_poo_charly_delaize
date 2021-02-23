@@ -4,7 +4,7 @@ class Post{
     // Attributes
     private $id;
     private $title;
-    private $content;
+    private $matter;
 
     // Getters
     public function getId(){
@@ -15,8 +15,8 @@ class Post{
         return $this->title;
     }
 
-    public function getContent(){
-        return $this->content;
+    public function getMatter(){
+        return $this->matter;
     }
 
     // Setters
@@ -32,9 +32,9 @@ class Post{
         // return $this;
     }
 
-    public function setContent($content)
+    public function setContent($matter)
     {
-        $this->content = $content;
+        $this->matter = $matter;
         // return $this;
     }
 
@@ -57,9 +57,9 @@ class Post{
         }
     }
 
-    public function hydrateContent(array $data){
-        foreach($data as $content => $value){
-            $method = 'set'.setTitle($content);
+    public function hydrateMatter(array $data){
+        foreach($data as $matter => $value){
+            $method = 'set'.setTitle($matter);
             if (method_exists($this, $method)){
                 $this->$method($value);
             }
