@@ -4,8 +4,8 @@ $content = ' ';
 
     if($_POST)
     {
-        echo "Titre: " . $_POST['title'] . '<br>';
-        echo "Contenu: " . $_POST['matter'] . '<br>';
+        echo "Pseudo: " . $_POST['pseudo'] . '<br>';
+        echo "Commentaire: " . $_POST['comments'] . '<br>';
 
         foreach($_POST as $index => $value)
         {
@@ -14,10 +14,10 @@ $content = ' ';
 
         if(isset($_GET['action']) && $_GET['action'] == 'modification')//modif
         {
-            $pdo->query("UPDATE posts SET id = '$_POST[id]', title = '$_POST[title]', matter = '$_POST[matter]' WHERE id = '$_GET[id]' ");
+            $pdo->query("UPDATE comments SET id_comments = '$_POST[id_comments]', pseudo = '$_POST[pseudo]', comments = '$_POST[comments]' WHERE id_comments = '$_GET[id_comments]' ");
         }else{
         //ajout en bdd
-            $pdo->query("INSERT INTO posts (title, matter) VALUES ('$_POST[title]','$_POST[matter]') ");
+            $pdo->query("INSERT INTO comments (pseudo, comments) VALUES ('$_POST[pseudo]','$_POST[comments]') ");
         }
     
     }
@@ -30,17 +30,17 @@ $content = ' ';
 
 <html>
 <div class="p-3 mb-2 bg-dark text-white">
-    <h1><?php if(isset($_GET['action']) && $_GET['action'] == 'modification') echo 'Modification'; else echo 'Ajout'; ?> d'un article</h1>
+    <h1><?php if(isset($_GET['action']) && $_GET['action'] == 'modification') echo 'Modification'; else echo 'Ajout'; ?> d'un commentaire</h1>
 </div>
 
 <form method="post" action="">
 
-<label for="title" class="labelTitle">Titre</label>
-<input type="text" id="title" name="title" >
+<label for="pseudo" class="labelPseudo">Pseudo</label>
+<input type="text" id="pseudo" name="pseudo" >
 <br>
 
-<label for="matter" class="labelMatter">Contenu</label><br>
-<textarea name="matter" cols="40" rows="10" ></textarea>
+<label for="comments" class="labelCommentaire">Commentaire</label><br>
+<textarea name="comments" cols="40" rows="10" ></textarea>
 <br>
 
 <input type="submit" name="inscription" class="button" value="Envoyer">

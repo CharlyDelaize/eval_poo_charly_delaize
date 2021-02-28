@@ -1,6 +1,6 @@
 <html>
 <div class="p-3 mb-2 bg-dark text-white">
-    <h1>News Actu</h1>
+    <h1>Commentaires</h1>
 </div>
 
 </html>
@@ -9,15 +9,14 @@
 $pdo = new PDO('mysql:host=localhost;dbname=news', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 $content = ' ';
 //affichage des articles
-        $r = $pdo->query('SELECT * FROM posts');
-        $content .= "<h2>Tableau des articles</h2>";
+        $r = $pdo->query('SELECT * FROM comments');
+        $content .= "<h2>Tableau des commentaires</h2>";
         $content .= "<table class=\"table\"><tr>";
         for($i= 0; $i < $r->columnCount(); $i++)
         {
             $column = $r->getColumnMeta($i);
             $content .= "<td>$column[name]</td>";
         }
-        $content .= "<td>Commentaires</td>";
         $content .= "<td>Modification</td>";
         $content .= "<td>Suppression<td>";
         $content .= "</tr>";
@@ -29,11 +28,10 @@ $content = ' ';
             {
                 $content .= "<td>$value</td>";
             }
-            $content .= "<td><a href=\"readComments.php?action=commentaire&id=$line[id]\">Modifier</a></td>";
 
-            $content .= "<td><a href=\"update.php?action=modification&id=$line[id]\">Modifier</a></td>";
+            $content .= "<td><a href=\"updateComments.php?action=modification&id_comments=$line[id_comments]\">Modifier</a></td>";
 
-            $content .= "<td><a href=\"delete.php?action=suppression&id=$line[id]\" onClick=\"return(confirm('En êtes vous certain ?'));\">Supprimer</a></td>";
+            $content .= "<td><a href=\"deleteComments.php?action=suppression&id_comments=$line[id_comments]\" onClick=\"return(confirm('En êtes vous certain ?'));\">Supprimer</a></td>";
             $content .= "</tr>";
         }
         $content .= "</table>";
@@ -41,7 +39,7 @@ $content = ' ';
 ?>
 
 
-<html><a href="create.php" class="nouvelArticle">Ajouter un nouvel article</a></html>
+<html><a href="createComments.php" class="nouveeauCommentaire">Envoyer un commentaire</a></html>
 
 <?= $content ?>
 
@@ -64,7 +62,7 @@ $content = ' ';
         color: blue;
     }
 
-    .nouvelArticle{
+    .nouveeauCommentaire{
         float:right;
         margin-right: 1em;
         font-size: 16px;
@@ -74,7 +72,7 @@ $content = ' ';
         transition: 0.5s;
     }
 
-    .nouvelArticle:hover{
+    .nouveeauCommentaire:hover{
         color: darkgrey;
     }
 </style>

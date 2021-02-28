@@ -27,26 +27,45 @@ if($_POST)
 
 <html>
 
-<h1><?php if(isset($_GET['action']) && $_GET['action'] == 'modification') echo 'Modification'; else echo 'Ajout'; ?> d'un article</h1>
+<div class="p-3 mb-2 bg-dark text-white">
+    <h1><?php if(isset($_GET['action']) && $_GET['action'] == 'modification') echo 'Modification'; else echo 'Ajout'; ?> d'un article</h1>
+</div>
 
-<form method="post" action="">
+<form method="post" action="" class="form">
 
-<label for="title">Titre</label>
+<label for="title" class="labelTitle">Titre</label>
 <input type="text" id="title" name="title">
 <br>
 
-<label for="matter">Contenu</label><br>
+<label for="matter" class="labelMatter">Contenu</label><br>
 <textarea name="matter" cols="40" rows="10"></textarea>
 <br>
 
-<input type="submit" name="inscription" value="Envoyer">
+<input type="submit" name="inscription" class="button" value="Envoyer">
 </form>
 
 <a href="sindex.php" class="return">Retour à l'index</a>
 
 <style>
+    
+    .labelTitle{
+        margin-left: 1em;
+    }
+
+    .labelMatter{
+        margin-left: 1em;
+    }
+
+    form textarea{
+        margin-left: 1em;
+    }
+
+    form .button{
+        margin-left: 1em;
+    }
 
     .return{
+        margin-left: 1em;
         text-decoration: none;
         color : rgb(19, 173, 232);
         transition: 0.5s;
