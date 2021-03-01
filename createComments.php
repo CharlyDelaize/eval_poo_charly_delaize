@@ -19,6 +19,7 @@ $content = ' ';
         //ajout en bdd
             $pdo->query("INSERT INTO comments (pseudo, comments, id) VALUES ('$_POST[pseudo]', '$_POST[comments]', '$_GET[id]') ");
         }
+    }
 
 ?>
 
