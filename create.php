@@ -12,7 +12,7 @@ $content = ' ';
             $_POST[$index] = addslashes($value);
         }
 
-        if(isset($_GET['action']) && $_GET['action'] == 'modification')//modif
+        if(isset($_GET['action']) && $_GET['action'] == 'modification')//modification
         {
             $pdo->query("UPDATE posts SET id = '$_POST[id]', title = '$_POST[title]', matter = '$_POST[matter]' WHERE id = '$_GET[id]' ");
         }else{
@@ -25,8 +25,6 @@ $content = ' ';
 ?>
 
 <?= $content ?>
-
-
 
 <html>
 <div class="p-3 mb-2 bg-dark text-white">
@@ -43,11 +41,11 @@ $content = ' ';
 <textarea name="matter" cols="40" rows="10" ></textarea>
 <br>
 
-<input type="submit" name="inscription" class="button" value="Envoyer">
+<input type="submit" name="send" class="button" value="Envoyer">
 
 </form>
 
-<a href="sindex.php" class="return">Retour à l'index</a>
+<a href="index.php" class="return">Retour à l'index</a>
 
 <style>
     .labelTitle{

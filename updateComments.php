@@ -12,9 +12,9 @@ $content = ' ';
             $_POST[$index] = addslashes($value);
         }
 
-        if(isset($_GET['action']) && $_GET['action'] == 'modification')//modif
+        if(isset($_GET['action']) && $_GET['action'] == 'modification')//modification
         {
-            $pdo->query("UPDATE comments SET id_comments = '$_POST[id_comments]', pseudo = '$_POST[pseudo]', comments = '$_POST[comments]' WHERE id_comments = '$_GET[id_comments]' ");
+            $pdo->query("UPDATE comments SET pseudo = '$_POST[pseudo]', comments = '$_POST[comments]' WHERE id_comments = '$_GET[id_comments]' ");
         }else{
         //ajout en bdd
             $pdo->query("INSERT INTO comments (pseudo, comments) VALUES ('$_POST[pseudo]','$_POST[comments]') ");
@@ -23,8 +23,6 @@ $content = ' ';
     }
 
 ?>
-
-<?= $content ?>
 
 <?= $content ?>
 
@@ -45,11 +43,11 @@ $content = ' ';
 <textarea name="comments" cols="40" rows="10" ></textarea>
 <br>
 
-<input type="submit" name="inscription" class="button" value="Envoyer">
+<input type="submit" name="send" class="button" value="Envoyer">
 
 </form>
 
-<a href="sindex.php" class="return">Retour à l'index</a>
+<a href="readComments.php" class="return">Retour aux commentaires</a>
 
 <style>
     .labelTitle{
@@ -76,7 +74,7 @@ $content = ' ';
     }
 
     .return:hover{
-        color: blue;
+        color: rgb(19, 125, 232);
     }
 
 </style>

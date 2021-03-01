@@ -29,11 +29,11 @@ $content = ' ';
             {
                 $content .= "<td>$value</td>";
             }
-            $content .= "<td><a href=\"readComments.php?action=commentaire&id=$line[id]\">Modifier</a></td>";
+            $content .= "<td><a href=\"readComments.php?action=commentaire&id=$line[id]\">Voir les commentaires</a></td>";
 
             $content .= "<td><a href=\"update.php?action=modification&id=$line[id]\">Modifier</a></td>";
 
-            $content .= "<td><a href=\"delete.php?action=suppression&id=$line[id]\" onClick=\"return(confirm('En êtes vous certain ?'));\">Supprimer</a></td>";
+            $content .= "<td><a href=\"delete.php?action=suppression&id=$line[id]\" onClick=\"return(confirm('Êtes-vous sûr de vouloir supprimer l\'article ?'));\">Supprimer</a></td>";
             $content .= "</tr>";
         }
         $content .= "</table>";
@@ -61,7 +61,7 @@ $content = ' ';
     }
 
     td a:hover{
-        color: blue;
+        color: rgb(19, 125, 232);
     }
 
     .nouvelArticle{
@@ -70,12 +70,12 @@ $content = ' ';
         font-size: 16px;
         font-weight: bold;
         text-decoration: none;
-        color : #555555;
+        color : rgb(19, 173, 232);
         transition: 0.5s;
     }
 
     .nouvelArticle:hover{
-        color: darkgrey;
+        color: rgb(19, 125, 232);
     }
 </style>
 

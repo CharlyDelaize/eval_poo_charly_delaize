@@ -22,8 +22,10 @@ class Post{
     // Setters
     public function setId($id)
     {
-        $this->id = $id;
-        // return $this;
+        if($id > 0){
+            $this->id = $id;
+        }
+        return $this;
     }
 
     public function setTitle($title)

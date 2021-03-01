@@ -2,26 +2,31 @@
 <div class="p-3 mb-2 bg-dark text-white">
     <h1>Commentaires</h1>
 </div>
-
-</html>
-
 <?php
 $pdo = new PDO('mysql:host=localhost;dbname=news', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 $content = ' ';
+$r = $pdo->query("SELECT * FROM posts");
+$test = $r->fetch(PDO::FETCH_ASSOC);
+$content .= "<a href=\"createComments.php?id=$_GET[id]\" class=\"newComments\">Envoyer un commentaire</a>";
+?>
+</html>
+
+<?php
+
 //affichage des articles
-        $r = $pdo->query('SELECT * FROM comments');
+
         $content .= "<h2>Tableau des commentaires</h2>";
         $content .= "<table class=\"table\"><tr>";
-        for($i= 0; $i < $r->columnCount(); $i++)
+        $s = $pdo->query("SELECT * FROM comments");
+        for($i= 0; $i < $s->columnCount(); $i++)
         {
-            $column = $r->getColumnMeta($i);
+            $column = $s->getColumnMeta($i);
             $content .= "<td>$column[name]</td>";
         }
         $content .= "<td>Modification</td>";
         $content .= "<td>Suppression<td>";
         $content .= "</tr>";
-
-        while($line = $r->fetch(PDO::FETCH_ASSOC))
+        while($line = $s->fetch(PDO::FETCH_ASSOC))
         {
             $content .= "<tr>";
             foreach($line as $index => $value)
@@ -31,17 +36,19 @@ $content = ' ';
 
             $content .= "<td><a href=\"updateComments.php?action=modification&id_comments=$line[id_comments]\">Modifier</a></td>";
 
-            $content .= "<td><a href=\"deleteComments.php?action=suppression&id_comments=$line[id_comments]\" onClick=\"return(confirm('En êtes vous certain ?'));\">Supprimer</a></td>";
+            $content .= "<td><a href=\"deleteComments.php?action=suppression&id_comments=$line[id_comments]\" onClick=\"return(confirm('Êtes-vous sûr de vouloir supprimer le commentaire ?'));\">Supprimer</a></td>";
             $content .= "</tr>";
         }
         $content .= "</table>";
+        
+
+        
 
 ?>
 
-
-<html><a href="createComments.php" class="nouveeauCommentaire">Envoyer un commentaire</a></html>
-
 <?= $content ?>
+
+<a href="index.php" class="return">Retour à l'index</a>
 
 <style>
     h2{
@@ -59,22 +66,35 @@ $content = ' ';
     }
 
     td a:hover{
-        color: blue;
+        color: rgb(19, 125, 232);
     }
 
-    .nouveeauCommentaire{
+    .newComments{
         float:right;
         margin-right: 1em;
         font-size: 16px;
         font-weight: bold;
         text-decoration: none;
-        color : #555555;
+        color : rgb(19, 173, 232);
         transition: 0.5s;
     }
 
-    .nouveeauCommentaire:hover{
-        color: darkgrey;
+    .newComments{
+        color: rgb(19, 125, 232);
     }
+
+    .return{
+        margin-left: 1em;
+        text-decoration: none;
+        color : rgb(19, 173, 232);
+        transition: 0.5s;
+    }
+
+    .return:hover{
+        color: blue;
+    }
+
+    
 </style>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">

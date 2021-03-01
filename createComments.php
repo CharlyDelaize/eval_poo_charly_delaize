@@ -12,21 +12,17 @@ $content = ' ';
             $_POST[$index] = addslashes($value);
         }
 
-        if(isset($_GET['action']) && $_GET['action'] == 'modification')//modif
+        if(isset($_GET['action']) && $_GET['action'] == 'modification')//modification
         {
             $pdo->query("UPDATE comments SET id_comments = '$_POST[id_comments]', pseudo = '$_POST[pseudo]', comments = '$_POST[comments]' WHERE id_comments = '$_GET[id_comments]' ");
         }else{
         //ajout en bdd
-            $pdo->query("INSERT INTO comments (pseudo, comments) VALUES ('$_POST[pseudo]','$_POST[comments]') ");
+            $pdo->query("INSERT INTO comments (pseudo, comments, id) VALUES ('$_POST[pseudo]', '$_POST[comments]', '$_GET[id]') ");
         }
-    
-    }
 
 ?>
 
 <?= $content ?>
-
-
 
 <html>
 <div class="p-3 mb-2 bg-dark text-white">
@@ -47,7 +43,12 @@ $content = ' ';
 
 </form>
 
-<a href="sindex.php" class="return">Retour à l'index</a>
+<?php
+        $content = ' ';
+        $r = $pdo->query("SELECT * FROM posts");
+        $test = $r->fetch(PDO::FETCH_ASSOC);
+        echo "<a href=\"readComments.php?id=$_GET[id]\" class=\"return\">Retour aux commentaires</a>";
+?>
 
 <style>
     .labelTitle{

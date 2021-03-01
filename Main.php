@@ -16,4 +16,5 @@ $article = new Post([
 $manager = new PostManager();
 $manager->add($article);
 
+
 ?>
